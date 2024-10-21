@@ -348,15 +348,15 @@ def create_main_window():
             root.bind("<Button-1>", lambda e: (handle_choice(None) if hasattr(choice_window, 'destroy') else None))
 
         for i, key_image in enumerate(keys):
-            frame = tk.Frame(key_grid_frame, highlightbackground="black", highlightthickness=0)
+            frame = tk.Frame(key_grid_frame, bg="white", relief="solid", highlightbackground="white", highlightthickness=2)
             frame.grid(row=0, column=i, padx=2, pady=2)
             key_widgets.append(frame)
 
             def update_border(event, frame=frame):
-                frame.config(highlightthickness=2)
+                frame.config(relief="sunken", bg="black", highlightbackground="black", highlightthickness=2)
 
             def reset_border(event, frame=frame):
-                frame.config(highlightthickness=0)
+                frame.config(relief="solid", bg="white", highlightbackground="white", highlightthickness=2)
 
             frame.bind("<Enter>", update_border)
             frame.bind("<Leave>", reset_border)
@@ -593,17 +593,17 @@ def create_main_window():
         cols = len(matrix[0])
         for i in range(rows):
             for j in range(cols):
-                frame = tk.Frame(grid_display_frame, highlightbackground="black", highlightthickness=0, borderwidth=1, relief="solid")
+                frame = tk.Frame(grid_display_frame, bg="white", relief="solid", highlightbackground="white", highlightthickness=2)
                 frame.grid(row=i, column=j, padx=2, pady=2)
                 grid_widgets.append(frame)
                 value = matrix[i][j]
 
                 def update_border(event, val=value, frame=frame):
                     update_message(f"Key index: {val}")
-                    frame.config(highlightthickness=2)
+                    frame.config(relief="sunken", bg="black", highlightbackground="black", highlightthickness=2)
 
                 def reset_border(event, frame=frame):
-                    frame.config(highlightthickness=0)
+                    frame.config(relief="sunken", bg="white", highlightbackground="white", highlightthickness=2)
 
                 # Send frame and value for message
                 frame.bind("<Enter>", lambda event, val=value, fr=frame: update_border(event, val, fr))
